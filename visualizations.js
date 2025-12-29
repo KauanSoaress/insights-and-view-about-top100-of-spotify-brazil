@@ -6,8 +6,8 @@
 */
 
 //---------------- Upload de dados ----------------
-data = FileAttachment("final_result_filtered_final.csv").csv({typed: true})
-tracks = FileAttachment("tracks_info-update-filtered.csv").csv({typed: true})
+data = FileAttachment("final_result_filtered_final.csv").csv({ typed: true })
+tracks = FileAttachment("tracks_info-update-filtered.csv").csv({ typed: true })
 topo = FileAttachment("br-states.json").json()
 
 //---------------- Gráfico Radial -----------------
@@ -19,7 +19,7 @@ radial_chart = {
       id: 'spotify:track:7qQV8fo97AFhrL9HPUeAsk',
       artist_names: ['Fernando & Sorocaba', 'Maiara & Maraisa'],
       name: 'Zona de Risco (feat. Maiara & Maraisa) - Ao Vivo',
-      genres: ['agronejo','arrocha','sertanejo universitario','sertanejo pop','sertanejo'],
+      genres: ['agronejo', 'arrocha', 'sertanejo universitario', 'sertanejo pop', 'sertanejo'],
       tempo: 145.784,
       duration: 182850,
       acousticness: 0.519,
@@ -32,7 +32,7 @@ radial_chart = {
   
   const points = d3
     .sort(track_id, (d) => d.id)
-    .flatMap(({id, artist_names, name, genres, tempo, duration, ...values}, i) =>
+    .flatMap(({ id, artist_names, name, genres, tempo, duration, ...values }, i) =>
       Object.entries(values).map(([key, raw]) => ({
         id,
         name,
@@ -51,7 +51,7 @@ radial_chart = {
     .scalePoint(new Set(Plot.valueof(points, "key")), [180, -180])
     .padding(0.5)
     .align(1);
-  
+
   const chart = Plot.plot({
     width: Math.max(width, 600),
     marginBottom: 10,
@@ -88,7 +88,7 @@ radial_chart = {
         fillOpacity: 0.02,
         strokeWidth: 0.5
       }),
-  
+
       // white axes
       Plot.link(longitude.domain(), {
         x1: longitude,
@@ -99,23 +99,20 @@ radial_chart = {
         strokeOpacity: 0.5,
         strokeWidth: 2.5
       }),
-  
+
       // axes labels, initials
       Plot.text(longitude.domain(), {
-        fx: 0,
-        fy: 0,
-        facet: "exclude",
         x: longitude,
         y: 90 - 1.09,
         text: (d) => d,
         fontSize: 14,
         lineWidth: 5
       }),
-  
+
       // areas
       Plot.area(points, {
-        x1: ({key}) => longitude(key),
-        y1: ({raw}) => 90 - raw,
+        x1: ({ key }) => longitude(key),
+        y1: ({ raw }) => 90 - raw,
         x2: 0,
         y2: 90,
         fill: "#4269D0",
@@ -123,21 +120,21 @@ radial_chart = {
         stroke: "#4269D0",
         curve: "cardinal-closed"
       }),
-  
+
       // points
       Plot.dot(points, {
-        x: ({key}) => longitude(key),
-        y: ({raw}) => 90 - raw,
+        x: ({ key }) => longitude(key),
+        y: ({ raw }) => 90 - raw,
         fill: "#4269D0",
         stroke: "var(--plot-background)"
       }),
-  
+
       // interactive labels
       Plot.text(
         points,
         Plot.pointer({
-          x: ({key}) => longitude(key),
-          y: ({raw}) => 90 - raw,
+          x: ({ key }) => longitude(key),
+          y: ({ raw }) => 90 - raw,
           text: (d) => `${Math.round(100 * d.raw)}%\n(${d.raw})`,
           textAnchor: "start",
           dx: 4,
@@ -153,11 +150,13 @@ radial_chart = {
   return chart;
 }
 
+
 // ------------- Gráfico Espacial --------------
 mapview = vl.markGeoshape({
-    fill: "#ddd",
-    stroke: "#fff",
-    strokeWidth: 1})
+  fill: "#ddd",
+  stroke: "#fff",
+  strokeWidth: 1
+})
   .data(vl.topojson(topo).feature("estados"))
   //.transform(
   //  vl.lookup('proprieties.Name').from(vl.data(data).key('state'))
