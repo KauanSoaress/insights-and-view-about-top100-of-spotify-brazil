@@ -104,7 +104,7 @@ radial_chart = {
       Plot.text(longitude.domain(), {
         x: longitude,
         y: 90 - 1.09,
-        text: (d) => d,
+        text: (d) => d.charAt(0).toUpperCase() + d.slice(1),
         fontSize: 14,
         lineWidth: 5
       }),
