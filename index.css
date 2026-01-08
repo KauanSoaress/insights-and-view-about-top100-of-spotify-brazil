@@ -1,10 +1,53 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #121212;
 }
 
-h1 {
-    text-align: center;
+nav {
+    height: 80px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #FFFFFF
+}
+
+#title {
+    font-size: 35px;
+}
+
+#menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 80px;    
+}
+
+#charts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+.option:hover{
+    cursor: pointer;
+    color: #1ED760;
+}
+
+#observablehq-viewof-selectedTrack-af42cfe4{
+    width: 100%;
 }

@@ -7,6 +7,45 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Insights and view about top 100 of spotify Brazil</h1>
+    <nav>
+        <span id="title">Brasil Top 100 Charts</span>
+        <div id="menu">
+            <ul>
+                <li class="option">Map View</li>
+                <li class="option">Race View</li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div id="observablehq-viewof-selectedTrack-af42cfe4"></div>
+
+        <div id="charts">
+            <div id="observablehq-viewof-mapview-74e83636"></div>
+            
+            <div>
+                <div id="observablehq-radial_chart-af42cfe4"></div>
+                <div id="observablehq-chart-a15421f9"></div>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+    <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/d/2fefc6b8d89caf16.js?v=4";
+        new Runtime().module(define, name => {
+            if (name === "viewof selectedTrack") return new Inspector(document.querySelector("#observablehq-viewof-selectedTrack-af42cfe4"));
+            if (name === "radial_chart") return new Inspector(document.querySelector("#observablehq-radial_chart-af42cfe4"));
+            if (name === "viewof mapview") return new Inspector(document.querySelector("#observablehq-viewof-mapview-74e83636"));
+            if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-a15421f9"));
+            return ["filteredData","chart"].includes(name);
+        });
+    </script>
+
+    
 </body>
 </html>
