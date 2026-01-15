@@ -17,22 +17,43 @@
         </div>
     </nav>
     <main>
-        <div id="observablehq-viewof-selectedTrack-af42cfe4"></div>
 
-        <div id="charts">
-            <div id="observablehq-viewof-mapview-74e83636"></div>
-            
-            <div>
-                <div id="observablehq-radial_chart-af42cfe4"></div>
-                <div id="observablehq-chart-a15421f9"></div>
-            </div>
-
+        <div id="intro" class="ctr mrg fade-in">
+            <h1>Descubra Mais Sobre Suas <span style="color: #1ED760"">Músicas</span></h1>
+            <p>Acompanhe as tendências do Top 100 do Spotify no Brasil e explore como as músicas mais ouvidas evoluem ao longo do tempo. Navegue pelo mapa para descobrir os destaques de cada estado, conheça os gêneros mais populares, analise o desempenho das músicas no ranking, suas características sonoras e os artistas que dominam as paradas.</p>
         </div>
+
+        <div id="selection" class="ctr mrg fade-in">
+            <h2>Comece buscando a sua música.</h3>
+            <div id="observablehq-viewof-selectedTrack-af42cfe4"></div> <!-- Track Input-->
+        </div>
+
+        <div id="map" class="ctr mrg">
+            <div id="observablehq-viewof-mapview-74e83636"></div> <!-- MapView -->    
+            <p class="fade-in">Selecione um estado no mapa para visualizar os dados do Top 100 do Spotify naquela região. Todos os gráficos abaixo são atualizados de acordo com o estado escolhido.</p>
+        </div>
+
+        <div id="state-view" class="ctr fade-in">
+            <div id="observablehq-wordcloud-05d2da95"></div> <!-- Word Cloud-->
+        </div>
+
+        <div>
+            <div id="observablehq-chartRace-854513ca"></div> <!-- Race Chart -->
+        </div>
+
+        <div id="observablehq-tracklength-98add689"></div> <!-- Track Length Chart -->
+
+        <div>
+            <div id="observablehq-radial_chart-af42cfe4"></div> <!-- Radial Chart-->
+            <div id="observablehq-chart-a15421f9"></div> <!-- Rank Line Graph -->
+        </div>
+
     </main>
     <footer>
 
     </footer>
 
+    <!-- Células Observable -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
     <script type="module">
         import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
@@ -42,10 +63,26 @@
             if (name === "radial_chart") return new Inspector(document.querySelector("#observablehq-radial_chart-af42cfe4"));
             if (name === "viewof mapview") return new Inspector(document.querySelector("#observablehq-viewof-mapview-74e83636"));
             if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-a15421f9"));
+            if (name === "wordcloud") return new Inspector(document.querySelector("#observablehq-wordcloud-05d2da95"));
+            if (name === "chartRace") return new Inspector(document.querySelector("#observablehq-chartRace-854513ca"));
+            if (name === "tracklength") return new Inspector(document.querySelector("#observablehq-tracklength-98add689"));
             return ["filteredData","chart"].includes(name);
         });
     </script>
 
-    
+    <script>
+        const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+            }
+        });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+        });
+    </script>
 </body>
 </html>
